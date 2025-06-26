@@ -13,14 +13,12 @@ return new class extends Migration {
     {
         Schema::create('vendor', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_vendor')->unique()->default(function () {
-                return 'VND-' . str_pad((Vendor::max('id') + 1), 5, '0', STR_PAD_LEFT);
-            });
+            $table->string('kode_vendor')->nullable()->unique();
             $table->string('nama_vendor');
             $table->text('alamat');
             $table->string('telepon');
             $table->string('email')->nullable();
-            $table->string('kontak_person');
+            $table->string('kontak_person')->nullable();
             $table->boolean('status_aktif')->default(true);
             $table->timestamps();
         });

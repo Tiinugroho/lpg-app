@@ -15,12 +15,30 @@
 <!--top-Header-menu-->
 <div id="user-nav" class="navbar navbar-inverse">
     <ul class="nav">
-        <li class=""><a title="" href="#"><i class="icon icon-user"></i> <span
-                    class="text">Profile</span></a></li>
-        <li class=""><a title="" href="login.html"><i class="icon icon-share-alt"></i> <span
-                    class="text">Logout</span></a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <i class="icon icon-user"></i>
+                <span class="text">{{ Auth::user()->name }}</span>
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#" id="btnLogout">
+                        <i class="icon-share-alt"></i> Logout
+                    </a>
+                    <form id="logoutForm" action="{{ url('logout') }}" method="POST" style="display:none;">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a href="#"><i class="icon-user"></i> Profile</a>
+        </li>
     </ul>
 </div>
+
+
 <div id="search">
     <input type="text" placeholder="Search here..." />
     <button type="submit" class="tip-left" title="Search"><i class="icon-search icon-white"></i></button>

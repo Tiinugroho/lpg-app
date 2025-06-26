@@ -11,394 +11,203 @@
         </div>
         <div class="container-fluid">
 
-            <!-- Statistik Utama LPG -->
-
+            {{-- Statistik Utama --}}
             <div class="row-fluid">
                 <div class="span7">
                     <div class="widget-box">
                         <div class="widget-title">
-                            <span class="icon"> <i class="icon-pencil"></i> </span>
+                            <span class="icon"><i class="icon-pencil"></i></span>
                             <h5>Pendapatan</h5>
                         </div>
                         <div class="widget-content">
                             <div class="row-fluid">
                                 <div class="span6 text-center">
-                                    <div class="stat-box">
-                                        <h3 style="color: #5bb75b; margin: 0;">Rp
-                                            {{ number_format($penjualanHariIni, 0, ',', '.') }}</h3>
-                                        <p style="margin: 5px 0;">Pendapatan Hari Ini</p>
-                                    </div>
+                                    <h3 style="color:#5bb75b;">Rp {{ number_format($penjualanHariIni, 0, ',', '.') }}</h3>
+                                    <p>Pendapatan Hari Ini</p>
                                 </div>
                                 <div class="span6 text-center">
-                                    <div class="stat-box">
-                                        <h3 style="color: #49afcd; margin: 0;">Rp
-                                            {{ number_format($penjualanBlnIni, 0, ',', '.') }}</h3>
-                                        <p style="margin: 5px 0;">Pendapatan Bulan Ini</p>
-                                    </div>
+                                    <h3 style="color:#49afcd;">Rp {{ number_format($penjualanBlnIni, 0, ',', '.') }}</h3>
+                                    <p>Pendapatan Bulan Ini</p>
                                 </div>
                             </div>
                             <hr>
                             <div class="row-fluid">
                                 <div class="span6 text-center">
-                                    <div class="stat-box">
-                                        <h3 style="color: #faa732; margin: 0;">{{ $transaksiBlnIni }}</h3>
-                                        <p style="margin: 5px 0;">Transaksi Bulan Ini</p>
-                                    </div>
+                                    <h3 style="color:#faa732;">{{ $transaksiBlnIni }}</h3>
+                                    <p>Transaksi Bulan Ini</p>
                                 </div>
                                 <div class="span6 text-center">
-                                    <div class="stat-box">
-                                        <h3 style="color: #da4f49; margin: 0;">{{ $pengembalianHariIni }}
-                                        </h3>
-                                        <p style="margin: 5px 0;">Pengembalian Hari Ini</p>
-                                    </div>
+                                    <h3 style="color:#da4f49;">{{ $pengembalianHariIni }}</h3>
+                                    <p>Pengembalian Hari Ini</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {{-- Statistik Stok --}}
                 <div class="span5">
                     <div class="widget-box">
                         <div class="widget-title">
                             <span class="icon"><i class="icon-fire"></i></span>
-                            <h5>Statistik Sistem LPG</h5>
-                            <div class="buttons">
-                                <a href="{{ url('/') }}" class="btn btn-mini btn-success">
-                                    <i class="icon-refresh"></i> Update Stats
-                                </a>
-                            </div>
-                        </div>
-                        <div class="widget-content">
-                            <div class="row-fluid">
-
-                                <ul class="stat-boxes2">
-                                    <li>
-                                        <div class="left peity_bar_good">
-                                            <span
-                                                class="badge badge-success">+{{ $stokTerkini->jumlah_tabung_penuh ?? 0 }}</span>
-                                        </div>
-                                        <div class="right">
-                                            <strong>{{ $stokTerkini->jumlah_tabung_penuh ?? 0 }}</strong> Tabung Penuh
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="left peity_line_neutral">
-                                            <span
-                                                class="badge badge-warning">{{ $stokTerkini->jumlah_tabung_kosong ?? 0 }}</span>
-                                        </div>
-                                        <div class="right">
-                                            <strong>{{ $stokTerkini->jumlah_tabung_kosong ?? 0 }}</strong> Tabung Kosong
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="left peity_bar_bad">
-                                            <span
-                                                class="badge badge-important">-{{ $stokTerkini->jumlah_tabung_rusak ?? 0 }}</span>
-                                        </div>
-                                        <div class="right">
-                                            <strong>{{ $stokTerkini->jumlah_tabung_rusak ?? 0 }}</strong> Tabung Rusak
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="left peity_line_good">
-                                            <span class="badge badge-info">+{{ $transaksiHariIni }}</span>
-                                        </div>
-                                        <div class="right">
-                                            <strong>{{ $transaksiHariIni }}</strong> Transaksi Hari Ini
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-
-            <!-- Quick Actions dan Pendapatan -->
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"><i class="icon-tasks"></i></span>
-                            <h5>Quick Actions</h5>
+                            <h5>Statistik LPG</h5>
                         </div>
                         <div class="widget-content">
                             <div class="row-fluid">
                                 <div class="span6">
-                                    <a href="{{ url('transaksi/create') }}" class="btn btn-primary btn-large btn-block"
-                                        style="margin-bottom: 10px;">
-                                        <i class="icon-shopping-cart"></i><br>
-                                        Transaksi Baru
-                                    </a>
+                                    <div class="card statistik-card">
+                                        <div class="card-body text-center">
+                                            <h4>{{ $stokTerkini->jumlah_tabung_penuh ?? 0 }}</h4>
+                                            <p class="text-muted">Tabung Penuh</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="span6">
-                                    <a href="{{ url('pengembalian/create') }}" class="btn btn-warning btn-large btn-block"
-                                        style="margin-bottom: 10px;">
-                                        <i class="icon-repeat"></i><br>
-                                        Pengembalian
-                                    </a>
+                                    <div class="card statistik-card">
+                                        <div class="card-body text-center">
+                                            <h4>{{ $stokTerkini->jumlah_tabung_kosong ?? 0 }}</h4>
+                                            <p class="text-muted">Tabung Kosong</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="row-fluid">
+
+                            <div class="row-fluid" style="margin-top: 10px;">
                                 <div class="span6">
-                                    <a href="{{ url('restock/create') }}" class="btn btn-success btn-large btn-block">
-                                        <i class="icon-truck"></i><br>
-                                        Restock
-                                    </a>
+                                    <div class="card statistik-card">
+                                        <div class="card-body text-center">
+                                            <h4>{{ $stokTerkini->jumlah_tabung_rusak ?? 0 }}</h4>
+                                            <p class="text-muted">Tabung Rusak</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="span6">
-                                    <a href="{{ url('laporan/harian') }}" class="btn btn-info btn-large btn-block">
-                                        <i class="icon-file"></i><br>
-                                        Laporan
-                                    </a>
+                                    <div class="card statistik-card">
+                                        <div class="card-body text-center">
+                                            <h4>{{ $transaksiHariIni }}</h4>
+                                            <p class="text-muted">Transaksi Hari Ini</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
             </div>
 
+            @if (Auth::check() && in_array(Auth::user()->role, ['super-admin', 'owner']))
+                <hr>
+
+                <!-- isi khusus super-admin -->
+                <div class="row-fluid">
+                    <div class="span4">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"><i class="icon-signal"></i></span>
+                                <h5>Grafik Penjualan 7 Hari Terakhir</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div id="grafikContainer">
+                                    <canvas id="grafikPenjualan"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"><i class="icon-signal"></i></span>
+                                <h5>Grafik Stok LPG</h5>
+                            </div>
+                            <div class="widget-content">
+                                <canvas id="grafikStokLPG" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="span4">
+                        <div class="widget-box">
+                            <div class="widget-title">
+                                <span class="icon"><i class="icon-group"></i></span>
+                                <h5>Vendor Aktif per Tipe Gas</h5>
+                            </div>
+                            <div class="widget-content">
+                                <canvas id="grafikVendor" height="250"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <hr>
 
-            <!-- Transaksi Terbaru dan Informasi Sistem -->
+            {{-- Informasi Sistem --}}
             <div class="row-fluid">
                 <div class="span6">
                     <div class="widget-box">
                         <div class="widget-title">
-                            <span class="icon"><i class="icon-list"></i></span>
-                            <h5>Transaksi Terbaru</h5>
+                            <span class="icon"><i class="icon-info-sign"></i></span>
+                            <h5>Status Sistem</h5>
                         </div>
-                        <div class="widget-content nopadding">
-                            <ul class="recent-posts">
-                                @forelse(\App\Models\TransaksiPembelian::with(['pelanggan', 'pengguna'])->latest()->take(5)->get() as $transaksi)
-                                    <li>
-                                        <div class="user-thumb">
-                                            <div
-                                                style="width: 40px; height: 40px; background: #3498db; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px;">
-                                                {{ substr($transaksi->pelanggan->nama_pelanggan, 0, 1) }}
-                                            </div>
-                                        </div>
-                                        <div class="article-post">
-                                            <span class="user-info">
-                                                {{ $transaksi->pelanggan->nama_pelanggan }} /
-                                                {{ $transaksi->tanggal_transaksi->format('d M Y') }} /
-                                                {{ $transaksi->tanggal_transaksi->format('H:i') }}
-                                            </span>
-                                            <p>
-                                                <strong>{{ $transaksi->kode_transaksi }}</strong> -
-                                                {{ $transaksi->jumlah_tabung }} tabung -
-                                                <span style="color: #5bb75b; font-weight: bold;">Rp
-                                                    {{ number_format($transaksi->total_harga, 0, ',', '.') }}</span>
-                                            </p>
-                                        </div>
-                                    </li>
-                                @empty
-                                    <li>
-                                        <div class="article-post">
-                                            <p>Belum ada transaksi hari ini</p>
-                                        </div>
-                                    </li>
-                                @endforelse
-                                <li>
-                                    <a href="{{ url('transaksi/') }}" class="btn btn-warning btn-mini">Lihat
-                                        Semua</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="span6">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"> <i class="icon-info-sign"></i> </span>
-                            <h5>Informasi Sistem</h5>
-                        </div>
-                        <div class="widget-content nopadding updates">
+                        <div class="widget-content">
                             @if ($stokTerkini && $stokTerkini->jumlah_tabung_penuh < 10)
-                                <div class="new-update clearfix">
-                                    <i class="icon-warning-sign"></i>
-                                    <div class="update-alert">
-                                        <a title="" href="{{ url('stok.index') }}">
-                                            <strong>Stok Tabung Penuh Menipis!</strong>
-                                        </a>
-                                        <span>Hanya tersisa {{ $stokTerkini->jumlah_tabung_penuh }} tabung</span>
-                                    </div>
-                                    <div class="update-date">
-                                        <span class="update-day">{{ now()->format('d') }}</span>
-                                        {{ now()->format('M') }}
-                                    </div>
-                                </div>
+                                <div class="alert alert-warning">Stok tabung penuh menipis!</div>
                             @endif
-
                             @if ($stokTerkini && $stokTerkini->jumlah_tabung_rusak > 5)
-                                <div class="new-update clearfix">
-                                    <i class="icon-remove-sign"></i>
-                                    <span class="update-notice">
-                                        <a title="" href="{{ url('stok.index') }}">
-                                            <strong>Banyak Tabung Rusak</strong>
-                                        </a>
-                                        <span>{{ $stokTerkini->jumlah_tabung_rusak }} tabung perlu diperbaiki</span>
-                                    </span>
-                                    <span class="update-date">
-                                        <span class="update-day">{{ now()->format('d') }}</span>
-                                        {{ now()->format('M') }}
-                                    </span>
-                                </div>
+                                <div class="alert alert-danger">Banyak tabung rusak! Segera tindak.</div>
                             @endif
-
-                            <div class="new-update clearfix">
-                                <i class="icon-ok-sign"></i>
-                                <span class="update-done">
-                                    <a title="" href="#">
-                                        <strong>Sistem Berjalan Normal</strong>
-                                    </a>
-                                    <span>Semua fitur sistem LPG aktif</span>
-                                </span>
-                                <span class="update-date">
-                                    <span class="update-day">{{ now()->format('d') }}</span>
-                                    {{ now()->format('M') }}
-                                </span>
-                            </div>
-
-                            <div class="new-update clearfix">
-                                <i class="icon-user"></i>
-                                <span class="update-notice">
-                                    <a title="" href="#">
-                                        @guest
-                                            <strong>Guest</strong>
-                                        @else
-                                            <strong>Login sebagai {{ ucfirst(auth()->user()->role) }}</strong>
-                                        @endguest
-                                    </a>
-                                    @guest
-                                        <span>Guest</span>
-                                    @else
-                                        <span>{{ auth()->user()->nama_lengkap }}</span>
-                                    @endguest
-                                </span>
-                                <span class="update-date">
-                                    <span class="update-day">{{ now()->format('d') }}</span>
-                                    {{ now()->format('M') }}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr>
-
-            <!-- Informasi Harga dan Vendor -->
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"><i class="icon-tags"></i></span>
-                            <h5>Informasi Harga & Stok</h5>
-                        </div>
-                        <div class="widget-content">
-                            @if ($stokTerkini)
-                                <div class="row-fluid text-center" style="margin-bottom: 15px;">
-                                    <div class="span12">
-                                        <h4 style="margin: 0;">
-                                            Harga per Tabung:
-                                            <span style="color: #5bb75b;">Rp
-                                                {{ number_format($stokTerkini->harga_per_tabung, 0, ',', '.') }}</span>
-                                        </h4>
-                                        <p style="color: #999; margin: 5px 0;">
-                                            Update terakhir: {{ $stokTerkini->tanggal_update->format('d F Y') }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="span4 text-center">
-                                        <div class="stat-box">
-                                            <h3 style="color: #5bb75b; margin: 0;">{{ $stokTerkini->jumlah_tabung_penuh }}
-                                            </h3>
-                                            <p style="margin: 5px 0;">Penuh</p>
-                                        </div>
-                                    </div>
-                                    <div class="span4 text-center">
-                                        <div class="stat-box">
-                                            <h3 style="color: #faa732; margin: 0;">
-                                                {{ $stokTerkini->jumlah_tabung_kosong }}</h3>
-                                            <p style="margin: 5px 0;">Kosong</p>
-                                        </div>
-                                    </div>
-                                    <div class="span4 text-center">
-                                        <div class="stat-box">
-                                            <h3 style="color: #da4f49; margin: 0;">{{ $stokTerkini->jumlah_tabung_rusak }}
-                                            </h3>
-                                            <p style="margin: 5px 0;">Rusak</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @else
-                                <div class="alert alert-warning">
-                                    <strong>Perhatian!</strong> Belum ada data stok. Silakan lakukan restock terlebih
-                                    dahulu.
-                                </div>
-                            @endif
+                            <div class="alert alert-success">Sistem berjalan normal</div>
                         </div>
                     </div>
                 </div>
 
+
+                {{-- Vendor Aktif --}}
                 <div class="span6">
                     <div class="widget-box">
                         <div class="widget-title">
                             <span class="icon"><i class="icon-user"></i></span>
                             <h5>Vendor Aktif</h5>
                         </div>
-                        <div class="widget-content nopadding" style="max-height: 250px; overflow-y: auto;">
-                            <ul class="recent-posts">
-                                @forelse(\App\Models\Vendor::where('status_aktif', true)->take(4)->get() as $vendor)
-                                    <li>
-                                        <div class="user-thumb">
-                                            <div
-                                                style="width: 40px; height: 40px; background: #e74c3c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px;">
-                                                {{ substr($vendor->nama_vendor, 0, 1) }}
-                                            </div>
-                                        </div>
-                                        <div class="article-post">
-                                            <span class="user-info">{{ $vendor->nama_vendor }}</span>
-                                            <p>{{ $vendor->kontak_person }} - {{ $vendor->telepon }}</p>
-                                        </div>
-                                    </li>
-                                @empty
-                                    <li>
-                                        <div class="article-post">
-                                            <span class="user-info">Belum ada vendor</span>
-                                            <p><a href="{{ url('vendor/create') }}" class="btn btn-primary">Tambah vendor baru</a></p>
-                                        </div>
-                                    </li>
-                                @endforelse
+                        <div class="widget-content">
+                            <ul>
+                                @foreach (\App\Models\Vendor::where('status_aktif', true)->take(5)->get() as $vendor)
+                                    <li>{{ $vendor->nama_vendor }} - {{ $vendor->telepon }}</li>
+                                @endforeach
                             </ul>
+                            @if (Auth::check() && in_array(Auth::user()->role, ['super-admin', 'owner']))
+                                <a href="{{ url('/manajemen-user/vendor') }}" class="btn btn-info btn-mini">Lihat Semua</a>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
     <style>
-        .stat-box {
-            text-align: center;
+        .statistik-card {
+            border: 1px solid #ddd;
+            border-radius: 6px;
             padding: 10px;
+            margin-bottom: 10px;
         }
 
-        .stat-box h3 {
+        .statistik-card h4 {
+            font-size: 28px;
+            color: #333;
             margin: 0;
-            font-size: 24px;
-            font-weight: bold;
         }
 
-        .stat-box p {
-            margin: 5px 0 0 0;
-            color: #666;
+        .statistik-card p {
+            margin: 5px 0 0;
+            font-size: 13px;
+            color: #777;
         }
+
 
         #grafikContainer {
             position: relative;
@@ -478,6 +287,80 @@
                     }
                 });
             }
+
+            const ctxStok = document.getElementById('grafikStokLPG');
+            if (ctxStok) {
+                new Chart(ctxStok.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Penuh', 'Kosong', 'Rusak'],
+                        datasets: [{
+                            data: [
+                                {{ $stokTerkini->jumlah_tabung_penuh ?? 0 }},
+                                {{ $stokTerkini->jumlah_tabung_kosong ?? 0 }},
+                                {{ $stokTerkini->jumlah_tabung_rusak ?? 0 }}
+                            ],
+                            backgroundColor: ['#5bb75b', '#faa732', '#da4f49'],
+                            borderColor: '#fff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Distribusi Stok LPG'
+                            }
+                        }
+                    }
+                });
+            }
+
+            const ctxVendor = document.getElementById('grafikVendor');
+            if (ctxVendor) {
+                new Chart(ctxVendor.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: {!! json_encode($vendorPerTipe->pluck('tipeGas.nama')) !!},
+                        datasets: [{
+                            label: 'Vendor Aktif',
+                            data: {!! json_encode($vendorPerTipe->pluck('jumlah')) !!},
+                            backgroundColor: '#3498db',
+                            borderColor: '#2980b9',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    stepSize: 1
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            title: {
+                                display: true,
+                                text: 'Vendor Aktif per Tipe Gas'
+                            }
+                        }
+                    }
+                });
+            }
+
         });
     </script>
+
+    
 @endsection

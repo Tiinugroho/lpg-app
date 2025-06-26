@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TipeGas;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class StokGas extends Model
 {
@@ -11,28 +12,23 @@ class StokGas extends Model
 
     protected $table = 'stok_gas';
 
-    protected $fillable = [
-        'nama_gas',
-        'jumlah_tabung_penuh',
-        'jumlah_tabung_kosong',
-        'jumlah_tabung_rusak',
-        'harga_beli_per_tabung',
-        'harga_jual_per_tabung',
-        'tanggal_update',
-    ];
+    protected $fillable = ['kode', 'vendor_id', 'tipe_gas_id', 'jumlah_penuh', 'jumlah_pengembalian','jumlah_rusak','harga_beli', 'harga_jual', 'tanggal_masuk'];
 
-    protected $casts = [
-        'harga_per_tabung' => 'decimal:2',
-        'tanggal_update' => 'date',
-    ];
-
-    public static function getStokTerkini()
+    public function vendor()
     {
-        return self::latest('tanggal_update')->first();
+        return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 
-    public function getTotalTabungAttribute()
+    protected static function booted()
     {
-        return $this->jumlah_tabung_penuh + $this->jumlah_tabung_kosong + $this->jumlah_tabung_rusak;
+        static::creating(function ($stok) {
+            $lastId = static::max('id') + 1;
+            $stok->kode = 'STK-' . str_pad($lastId, 5, '0', STR_PAD_LEFT);
+        });
+    }
+
+    public function tipeGas()
+    {
+        return $this->belongsTo(TipeGas::class, 'tipe_gas_id');
     }
 }

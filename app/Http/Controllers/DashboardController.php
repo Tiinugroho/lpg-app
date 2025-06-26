@@ -2,47 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StokGas;
-use App\Models\TransaksiPembelian;
-use App\Models\PengembalianTabung;
-use App\Models\RestockVendor;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Models\Vendor;
+use App\Models\StokGas;
+use App\Models\PembelianGas;
+use App\Models\PenjualanGas;
+use Illuminate\Http\Request;
+use App\Models\PengembalianGas;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $stokTerkini = StokGas::getStokTerkini();
-        
-        // Data hari ini
-        $transaksiHariIni = TransaksiPembelian::whereDate('tanggal_transaksi', today())->count();
-        $penjualanHariIni = TransaksiPembelian::whereDate('tanggal_transaksi', today())->sum('total_harga');
-        $pengembalianHariIni = PengembalianTabung::whereDate('tanggal_pengembalian', today())->sum('jumlah_tabung_dikembalikan');
-        
-        // Data bulan ini
-        $transaksiBlnIni = TransaksiPembelian::whereMonth('tanggal_transaksi', now()->month)->count();
-        $penjualanBlnIni = TransaksiPembelian::whereMonth('tanggal_transaksi', now()->month)->sum('total_harga');
-        
-        // Grafik penjualan 7 hari terakhir
-        $grafikPenjualan = [];
-        for ($i = 6; $i >= 0; $i--) {
-            $tanggal = Carbon::now()->subDays($i);
-            $penjualan = TransaksiPembelian::whereDate('tanggal_transaksi', $tanggal)->sum('total_harga');
-            $grafikPenjualan[] = [
-                'tanggal' => $tanggal->format('d/m'),
-                'penjualan' => $penjualan
-            ];
-        }
+        // Data pendapatan & transaksi
+        $penjualanHariIni = PenjualanGas::whereDate('tanggal_transaksi', Carbon::today())->sum('total_harga');
+        $penjualanBlnIni = PenjualanGas::whereMonth('tanggal_transaksi', Carbon::now()->month)->sum('total_harga');
+        $transaksiBlnIni = PenjualanGas::whereMonth('tanggal_transaksi', Carbon::now()->month)->count();
+        $transaksiHariIni = PenjualanGas::whereDate('tanggal_transaksi', Carbon::today())->count();
+        $pengembalianHariIni = PengembalianGas::whereDate('tanggal_pengembalian', Carbon::today())->count();
+        $stokTerkini = StokGas::orderBy('updated_at', 'desc')->first();
 
-        return view('dashboard', compact(
-            'stokTerkini',
-            'transaksiHariIni',
-            'penjualanHariIni',
-            'pengembalianHariIni',
-            'transaksiBlnIni',
-            'penjualanBlnIni',
-            'grafikPenjualan'
-        ));
+        // Data grafik 7 hari terakhir
+        $grafikPenjualan = PenjualanGas::select(DB::raw('DATE(tanggal_transaksi) as tanggal'), DB::raw('SUM(total_harga) as penjualan'))
+            ->where('tanggal_transaksi', '>=', Carbon::now()->subDays(6))
+            ->groupBy(DB::raw('DATE(tanggal_transaksi)'))
+            ->orderBy('tanggal')
+            ->get()
+            ->map(function ($item) {
+                return [
+                    'tanggal' => Carbon::parse($item->tanggal)->translatedFormat('d M'),
+                    'penjualan' => $item->penjualan,
+                ];
+            })
+            ->toArray();
+
+        $vendorPerTipe = StokGas::selectRaw('count(distinct vendor_id) as jumlah, tipe_gas_id')->groupBy('tipe_gas_id')->with('tipeGas')->get();
+
+        return view('dashboard', compact('penjualanHariIni', 'penjualanBlnIni', 'transaksiBlnIni', 'transaksiHariIni', 'pengembalianHariIni', 'stokTerkini', 'grafikPenjualan', 'vendorPerTipe'));
     }
 }

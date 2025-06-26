@@ -69,15 +69,49 @@
     <script src="{{ asset('adm/js/maruti.tables.js') }}"></script>
     <script src="{{ asset('adm/js/maruti.form_common.js') }}"></script>
 
-    <script src="{{asset('adm/js/jquery.min.js')}}"></script>
-    <script src="{{asset('adm/js/jquery.ui.custom.js')}}"></script>
-    <script src="{{asset('adm/js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('adm/js/bootstrap-colorpicker.js')}}"></script>
-    <script src="{{asset('adm/js/bootstrap-datepicker.js')}}"></script>
-    <script src="{{asset('adm/js/jquery.uniform.js')}}"></script>
-    <script src="{{asset('adm/js/select2.min.js')}}"></script>
-    <script src="{{asset('adm/js/maruti.js')}}"></script>
-    <script src="{{asset('adm/js/maruti.form_common.js')}}"></script>
+    <script src="{{ asset('adm/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('adm/js/jquery.ui.custom.js') }}"></script>
+    <script src="{{ asset('adm/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('adm/js/bootstrap-colorpicker.js') }}"></script>
+    <script src="{{ asset('adm/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('adm/js/jquery.uniform.js') }}"></script>
+    <script src="{{ asset('adm/js/select2.min.js') }}"></script>
+    <script src="{{ asset('adm/js/maruti.js') }}"></script>
+    <script src="{{ asset('adm/js/maruti.form_common.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.getElementById('btnLogout').addEventListener('click', function(e) {
+            e.preventDefault(); // biar nggak loncat ke #
+
+            Swal.fire({
+                title: 'Yakin ingin logout?',
+                text: "Kamu akan keluar dari sistem.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Ya, Logout',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('logoutForm').submit();
+                }
+            });
+        });
+    </script>
+
+    @if (session('welcome'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Selamat Datang!',
+                text: @json(session('success') . ' ' . Auth::user()->nama_lengkap),
+                timer: 2500,
+                showConfirmButton: false
+            });
+        </script>
+    @endif
+
+
 
     <script type="text/javascript">
         // This function is called from the pop-up menus to transfer to
