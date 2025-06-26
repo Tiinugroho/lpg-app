@@ -2,22 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StokGas;
+use App\Models\PengembalianTabung;
 use Illuminate\Http\Request;
 
-class StokGasController extends Controller
+class PengembalianTabungController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $stokGas = StokGas::all();
-
-        // if (!$stokGas) {
-        //     return redirect()->route('stok.create')->with('error', 'Stok gas belum tersedia. Silakan tambahkan stok terlebih dahulu.');
-        // }
-        return view('stok.index', compact('stokGas'));
+        //
     }
 
     /**
@@ -25,7 +20,7 @@ class StokGasController extends Controller
      */
     public function create()
     {
-        return view('stok.create');
+        //
     }
 
     /**
@@ -39,7 +34,7 @@ class StokGasController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(StokGas $stokGas)
+    public function show(PengembalianTabung $pengembalianTabung)
     {
         //
     }
@@ -47,7 +42,7 @@ class StokGasController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(StokGas $stokGas)
+    public function edit(PengembalianTabung $pengembalianTabung)
     {
         //
     }
@@ -55,7 +50,7 @@ class StokGasController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, StokGas $stokGas)
+    public function update(Request $request, PengembalianTabung $pengembalianTabung)
     {
         //
     }
@@ -63,7 +58,7 @@ class StokGasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(StokGas $stokGas)
+    public function destroy(PengembalianTabung $pengembalianTabung)
     {
         //
     }

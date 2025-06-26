@@ -9,15 +9,9 @@
                 <li><a href="gallery.html">Pengembalian Gas</a></li>
             </ul>
         </li>
+        <li> <a href="{{ url('stok/') }}"><i class="icon icon-inbox"></i> <span>Stok Gas</span></a> </li>
         <li> <a href="widgets.html"><i class="icon icon-file"></i> <span>Laporan</span></a> </li>
-        <li class="submenu"> <a href="#"><i class="icon icon-inbox"></i> <span>Manajemen Gas</span> <span><i
-                        class="icon icon-chevron-down"></i></span> </a>
-            <ul>
-                <li><a href="form-common.html">Penuh</a></li>
-                <li><a href="form-validation.html">Kosong</a></li>
-                <li><a href="form-wizard.html">Rusak</a></li>
-            </ul>
-        </li>
+        
         <li class="submenu"> <a href="#"><i class="icon icon-inbox"></i> <span>Manajemen User</span> <span><i
                         class="icon icon-chevron-down"></i></span> </a>
             <ul>

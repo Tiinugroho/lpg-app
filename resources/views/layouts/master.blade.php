@@ -14,6 +14,21 @@
     <link rel="stylesheet" href="{{ asset('adm/css/maruti-media.css') }}" class="skin-color" />
     <link rel="stylesheet" href="{{ asset('adm/css/datepicker.css') }}" />
 
+    <link rel="stylesheet" href="{{ asset('adm/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/bootstrap-responsive.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/uniform.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/maruti-style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/maruti-media.css') }}" class="skin-color" />
+
+    <link rel="stylesheet" href="{{ asset('adm/css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/bootstrap-responsive.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/colorpicker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/datepicker.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/uniform.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/select2.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/maruti-style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('adm/css/maruti-media.css') }}" class="skin-color" />
 </head>
 
 <body>
@@ -41,11 +56,28 @@
     <script src="{{ asset('adm/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('adm/js/maruti.tables.js') }}"></script>
     <script src="{{ asset('adm/js/jquery.uniform.js') }}"></script>
-    <script src="{{ asset('adm/js/maruti.form_common.js')}}"></script>
-    <script src="{{ asset('adm/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{ asset('adm/js/maruti.form_common.js') }}"></script>
+    <script src="{{ asset('adm/js/bootstrap-datepicker.js') }}"></script>
 
+    <script src="{{ asset('adm/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('adm/js/jquery.ui.custom.js') }}"></script>
+    <script src="{{ asset('adm/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('adm/js/jquery.uniform.js') }}"></script>
+    <script src="{{ asset('adm/js/select2.min.js') }}"></script>
+    <script src="{{ asset('adm/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('adm/js/maruti.js') }}"></script>
+    <script src="{{ asset('adm/js/maruti.tables.js') }}"></script>
+    <script src="{{ asset('adm/js/maruti.form_common.js') }}"></script>
 
-
+    <script src="{{asset('adm/js/jquery.min.js')}}"></script>
+    <script src="{{asset('adm/js/jquery.ui.custom.js')}}"></script>
+    <script src="{{asset('adm/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('adm/js/bootstrap-colorpicker.js')}}"></script>
+    <script src="{{asset('adm/js/bootstrap-datepicker.js')}}"></script>
+    <script src="{{asset('adm/js/jquery.uniform.js')}}"></script>
+    <script src="{{asset('adm/js/select2.min.js')}}"></script>
+    <script src="{{asset('adm/js/maruti.js')}}"></script>
+    <script src="{{asset('adm/js/maruti.form_common.js')}}"></script>
 
     <script type="text/javascript">
         // This function is called from the pop-up menus to transfer to
