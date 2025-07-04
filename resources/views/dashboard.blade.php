@@ -1,366 +1,438 @@
 @extends('layouts.master')
+
 @section('title', 'Dashboard')
+
 @section('content')
-    <div id="content">
-        <div id="content-header">
-            <div id="breadcrumb">
-                <a href="{{ url('/') }}" title="Go to Home" class="tip-bottom">
-                    <i class="icon-home"></i> Home
-                </a>
+    <div class="page-wrapper">
+        <!-- Breadcrumb -->
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-6 align-self-center">
+                    <h4 class="page-title">Dashboard & Transaksi</h4>
+                </div>
             </div>
         </div>
+
         <div class="container-fluid">
-
-            {{-- Statistik Utama --}}
-            <div class="row-fluid">
-                <div class="span7">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"><i class="icon-pencil"></i></span>
-                            <h5>Pendapatan</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div class="row-fluid">
-                                <div class="span6 text-center">
-                                    <h3 style="color:#5bb75b;">Rp {{ number_format($penjualanHariIni, 0, ',', '.') }}</h3>
-                                    <p>Pendapatan Hari Ini</p>
+            <!-- Stat Cards -->
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body bg-gradient-success text-white rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Pendapatan Hari Ini</h5>
+                                    <h3 class="mb-0">Rp {{ number_format($penjualanHariIni, 0, ',', '.') }}</h3>
                                 </div>
-                                <div class="span6 text-center">
-                                    <h3 style="color:#49afcd;">Rp {{ number_format($penjualanBlnIni, 0, ',', '.') }}</h3>
-                                    <p>Pendapatan Bulan Ini</p>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row-fluid">
-                                <div class="span6 text-center">
-                                    <h3 style="color:#faa732;">{{ $transaksiBlnIni }}</h3>
-                                    <p>Transaksi Bulan Ini</p>
-                                </div>
-                                <div class="span6 text-center">
-                                    <h3 style="color:#da4f49;">{{ $pengembalianHariIni }}</h3>
-                                    <p>Pengembalian Hari Ini</p>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-cash-multiple display-4 opacity-75"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                {{-- Statistik Stok --}}
-                <div class="span5">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"><i class="icon-fire"></i></span>
-                            <h5>Statistik LPG</h5>
-                        </div>
-                        <div class="widget-content">
-                            <div class="row-fluid">
-                                <div class="span6">
-                                    <div class="card statistik-card">
-                                        <div class="card-body text-center">
-                                            <h4>{{ $stokTerkini->jumlah_tabung_penuh ?? 0 }}</h4>
-                                            <p class="text-muted">Tabung Penuh</p>
-                                        </div>
-                                    </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body bg-gradient-info text-white rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Transaksi Bulan Ini</h5>
+                                    <h3 class="mb-0">{{ $transaksiBlnIni }}</h3>
                                 </div>
-                                <div class="span6">
-                                    <div class="card statistik-card">
-                                        <div class="card-body text-center">
-                                            <h4>{{ $stokTerkini->jumlah_tabung_kosong ?? 0 }}</h4>
-                                            <p class="text-muted">Tabung Kosong</p>
-                                        </div>
-                                    </div>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-chart-line display-4 opacity-75"></i>
                                 </div>
                             </div>
-
-                            <div class="row-fluid" style="margin-top: 10px;">
-                                <div class="span6">
-                                    <div class="card statistik-card">
-                                        <div class="card-body text-center">
-                                            <h4>{{ $stokTerkini->jumlah_tabung_rusak ?? 0 }}</h4>
-                                            <p class="text-muted">Tabung Rusak</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="span6">
-                                    <div class="card statistik-card">
-                                        <div class="card-body text-center">
-                                            <h4>{{ $transaksiHariIni }}</h4>
-                                            <p class="text-muted">Transaksi Hari Ini</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
-
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body bg-gradient-danger text-white rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Penjualan Bulan Ini</h5>
+                                    <h3 class="mb-0">{{ $penjualanBlnIni }} Tabung</h3>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-trending-up display-4 opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body bg-gradient-dark text-white rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Pengembalian Bulan Ini</h5>
+                                    <h3 class="mb-0">{{ $pengembalianBlnIni }} Tabung</h3>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-backup-restore display-4 opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body bg-gradient-warning text-white rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Total Stok Gas Penuh</h5>
+                                    <h3 class="mb-0">{{ $totalStokPenuh }} Tabung</h3>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-gas-cylinder display-4 opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body bg-gradient-secondary text-white rounded">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Total Stok Gas Kosong</h5>
+                                    <h3 class="mb-0">{{ $totalStokKosong }} Tabung</h3>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-cylinder display-4 opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card shadow-lg border-0 h-100">
+                        <div class="card-body" style="background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white;">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-1">Total Stok Gas Rusak</h5>
+                                    <h3 class="mb-0">{{ $totalStokRusak }} Tabung</h3>
+                                </div>
+                                <div class="ms-3">
+                                    <i class="mdi mdi-alert-circle display-4 opacity-75"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @if (in_array(Auth::user()->role, ['super-admin', 'owner']))
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="card shadow-lg border-0 h-100">
+                            <div class="card-body"
+                                style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1">
+                                        <h5 class="mb-1">Total Vendor</h5>
+                                        <h3 class="mb-0">{{ $totalVendor }}</h3>
+                                    </div>
+                                    <div class="ms-3">
+                                        <i class="mdi mdi-account-group display-4 opacity-75"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </div>
-
-            @if (Auth::check() && in_array(Auth::user()->role, ['super-admin', 'owner']))
-                <hr>
-
-                <!-- isi khusus super-admin -->
-                <div class="row-fluid">
-                    <div class="span4">
-                        <div class="widget-box">
-                            <div class="widget-title">
-                                <span class="icon"><i class="icon-signal"></i></span>
-                                <h5>Grafik Penjualan 7 Hari Terakhir</h5>
-                            </div>
-                            <div class="widget-content">
-                                <div id="grafikContainer">
-                                    <canvas id="grafikPenjualan"></canvas>
+            
+            <!-- Laporan Section -->
+            <div class="row mt-4">
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, #17a2b8, #138496); color: white;">
+                            <h5 class="mb-0"><i class="mdi mdi-file-document me-2"></i>Laporan Harian</h5>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('laporan.harian') }}" method="GET" target="_blank">
+                                <div class="form-group">
+                                    <label><i class="mdi mdi-calendar me-1"></i>Tanggal</label>
+                                    <input type="date" name="tanggal" class="form-control"
+                                        value="{{ date('Y-m-d') }}" required>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="span4">
-                        <div class="widget-box">
-                            <div class="widget-title">
-                                <span class="icon"><i class="icon-signal"></i></span>
-                                <h5>Grafik Stok LPG</h5>
-                            </div>
-                            <div class="widget-content">
-                                <canvas id="grafikStokLPG" height="250"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="span4">
-                        <div class="widget-box">
-                            <div class="widget-title">
-                                <span class="icon"><i class="icon-group"></i></span>
-                                <h5>Vendor Aktif per Tipe Gas</h5>
-                            </div>
-                            <div class="widget-content">
-                                <canvas id="grafikVendor" height="250"></canvas>
-                            </div>
+                                <button type="submit" class="btn btn-info shadow">
+                                    <i class="mdi mdi-file-document"></i> Lihat Laporan
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            @endif
-
-            <hr>
-
-            {{-- Informasi Sistem --}}
-            <div class="row-fluid">
-                <div class="span6">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"><i class="icon-info-sign"></i></span>
-                            <h5>Status Sistem</h5>
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, #ffc107, #e0a800); color: white;">
+                            <h5 class="mb-0"><i class="mdi mdi-file-chart me-2"></i>Laporan Mingguan</h5>
                         </div>
-                        <div class="widget-content">
-                            @if ($stokTerkini && $stokTerkini->jumlah_tabung_penuh < 10)
-                                <div class="alert alert-warning">Stok tabung penuh menipis!</div>
-                            @endif
-                            @if ($stokTerkini && $stokTerkini->jumlah_tabung_rusak > 5)
-                                <div class="alert alert-danger">Banyak tabung rusak! Segera tindak.</div>
-                            @endif
-                            <div class="alert alert-success">Sistem berjalan normal</div>
+                        <div class="card-body">
+                            <form action="{{ route('laporan.mingguan') }}" method="GET" target="_blank">
+                                <div class="form-group">
+                                    <label><i class="mdi mdi-calendar-week me-1"></i>Minggu</label>
+                                    <input type="week" name="minggu" class="form-control"
+                                        value="{{ date('Y-\WW') }}" required>
+                                </div>
+                                <button type="submit" class="btn btn-warning shadow">
+                                    <i class="mdi mdi-file-document"></i> Lihat Laporan
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
-
-
-                {{-- Vendor Aktif --}}
-                <div class="span6">
-                    <div class="widget-box">
-                        <div class="widget-title">
-                            <span class="icon"><i class="icon-user"></i></span>
-                            <h5>Vendor Aktif</h5>
+                <div class="col-md-4">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-header"
+                            style="background: linear-gradient(135deg, #6c757d, #545b62); color: white;">
+                            <h5 class="mb-0"><i class="mdi mdi-file-table me-2"></i>Laporan Bulanan</h5>
                         </div>
-                        <div class="widget-content">
-                            <ul>
-                                @foreach (\App\Models\Vendor::where('status_aktif', true)->take(5)->get() as $vendor)
-                                    <li>{{ $vendor->nama_vendor }} - {{ $vendor->telepon }}</li>
-                                @endforeach
-                            </ul>
-                            @if (Auth::check() && in_array(Auth::user()->role, ['super-admin', 'owner']))
-                                <a href="{{ url('/manajemen-user/vendor') }}" class="btn btn-info btn-mini">Lihat Semua</a>
-                            @endif
+                        <div class="card-body">
+                            <form action="{{ route('laporan.bulanan') }}" method="GET" target="_blank">
+                                <div class="form-group">
+                                    <label><i class="mdi mdi-calendar-month me-1"></i>Bulan</label>
+                                    <input type="month" name="bulan" class="form-control"
+                                        value="{{ date('Y-m') }}" required>
+                                </div>
+                                <button type="submit" class="btn btn-secondary shadow">
+                                    <i class="mdi mdi-file-document"></i> Lihat Laporan
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
+@endsection
 
-    <style>
-        .statistik-card {
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .statistik-card h4 {
-            font-size: 28px;
-            color: #333;
-            margin: 0;
-        }
-
-        .statistik-card p {
-            margin: 5px 0 0;
-            font-size: 13px;
-            color: #777;
-        }
-
-
-        #grafikContainer {
-            position: relative;
-            height: 300px;
-        }
-
-        #grafikPenjualan {
-            max-width: 100%;
-            height: auto;
-        }
-    </style>
-
-    <!-- Chart.js untuk grafik -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Grafik Penjualan 7 Hari Terakhir
-            const ctx = document.getElementById('grafikPenjualan');
-            if (ctx) {
-                const grafikPenjualan = new Chart(ctx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: {!! json_encode(array_column($grafikPenjualan, 'tanggal')) !!},
-                        datasets: [{
-                            label: 'Penjualan (Rp)',
-                            data: {!! json_encode(array_column($grafikPenjualan, 'penjualan')) !!},
-                            borderColor: '#3498db',
-                            backgroundColor: 'rgba(52, 152, 219, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointBackgroundColor: '#3498db',
-                            pointBorderColor: '#2980b9',
-                            pointRadius: 5,
-                            pointHoverRadius: 7
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Grafik Penjualan 7 Hari Terakhir',
-                                font: {
-                                    size: 16,
-                                    weight: 'bold'
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    callback: function(value) {
-                                        return 'Rp ' + value.toLocaleString('id-ID');
-                                    }
-                                }
-                            },
-                            x: {
-                                grid: {
-                                    display: false
-                                }
-                            }
-                        },
-                        elements: {
-                            line: {
-                                borderWidth: 3
-                            }
-                        },
-                        interaction: {
-                            intersect: false,
-                            mode: 'index'
-                        }
+        $(document).ready(function() {
+            let penjualanIndex = 1;
+            let pengembalianIndex = 1;
+            let pembelianIndex = 1;
+
+            // Initialize Select2 dengan pengecekan yang lebih ketat
+            function initSelect2(container) {
+                container = container || $(document);
+                container.find('.select2, .select2-item').each(function() {
+                    if (!$(this).hasClass('select2-hidden-accessible')) {
+                        const placeholder = $(this).data('placeholder') || 'Pilih...';
+                        console.log('Initializing Select2 with placeholder:', placeholder);
+                        $(this).select2({
+                            placeholder: placeholder,
+                            allowClear: true,
+                            width: '100%',
+                            dropdownParent: $(this).closest('.card-body')
+                        });
                     }
                 });
             }
 
-            const ctxStok = document.getElementById('grafikStokLPG');
-            if (ctxStok) {
-                new Chart(ctxStok.getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Penuh', 'Kosong', 'Rusak'],
-                        datasets: [{
-                            data: [
-                                {{ $stokTerkini->jumlah_tabung_penuh ?? 0 }},
-                                {{ $stokTerkini->jumlah_tabung_kosong ?? 0 }},
-                                {{ $stokTerkini->jumlah_tabung_rusak ?? 0 }}
-                            ],
-                            backgroundColor: ['#5bb75b', '#faa732', '#da4f49'],
-                            borderColor: '#fff',
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            },
-                            title: {
-                                display: true,
-                                text: 'Distribusi Stok LPG'
-                            }
-                        }
-                    }
-                });
+            // Auto fill harga jual pada penjualan
+            $(document).on('change', 'select[name*="[produk_id]"]', function() {
+                const selectedOption = $(this).find('option:selected');
+                const harga = selectedOption.data('harga');
+                const stok = selectedOption.data('stok');
+                const container = $(this).closest('.penjualan-item');
+
+                if (harga) {
+                    container.find('.harga-display').val('Rp ' + new Intl.NumberFormat('id-ID').format(
+                        harga));
+                    container.find('.jumlah-input').attr('max', stok);
+                }
+            });
+
+            // Penjualan Repeater
+            $('#add-penjualan').click(function() {
+                const template = `
+            <div class="penjualan-item border p-3 mb-3 rounded shadow-sm" data-item="${penjualanIndex}" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="mb-0 text-success"><i class="mdi mdi-gas-cylinder me-1"></i>Produk #${penjualanIndex + 1}</h6>
+                    <button type="button" class="btn btn-danger btn-sm remove-penjualan">
+                        <i class="mdi mdi-delete"></i> Hapus
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><i class="mdi mdi-gas-cylinder me-1"></i>Produk Gas</label>
+                        <select name="items[${penjualanIndex}][produk_id]" class="select2 form-control" data-placeholder="Pilih Produk Gas" required>
+                            <option value=""></option>
+                            @foreach ($stokGas as $stok)
+                                @if ($stok->jumlah_penuh > 0)
+                                    <option value="{{ $stok->id }}" data-harga="{{ $stok->harga_jual }}" data-stok="{{ $stok->jumlah_penuh }}">
+                                        {{ $stok->tipeGas->nama }} (Stok: {{ $stok->jumlah_penuh }}) - Rp {{ number_format($stok->harga_jual, 0, ',', '.') }}
+                                    </option>
+                                @endif
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="mdi mdi-counter me-1"></i>Jumlah</label>
+                        <input type="number" name="items[${penjualanIndex}][jumlah]" class="form-control jumlah-input" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="mdi mdi-currency-usd me-1"></i>Harga Satuan</label>
+                        <input type="text" class="form-control harga-display" readonly>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                $('#penjualan-container').append(template);
+                const newItem = $('.penjualan-item').last();
+                initSelect2(newItem);
+                penjualanIndex++;
+                updatePenjualanButtons();
+            });
+
+            $(document).on('click', '.remove-penjualan', function() {
+                if ($('.penjualan-item').length > 1) {
+                    $(this).closest('.penjualan-item').remove();
+                    updatePenjualanButtons();
+                }
+            });
+
+            function updatePenjualanButtons() {
+                if ($('.penjualan-item').length > 1) {
+                    $('.remove-penjualan').show();
+                } else {
+                    $('.remove-penjualan').hide();
+                }
             }
 
-            const ctxVendor = document.getElementById('grafikVendor');
-            if (ctxVendor) {
-                new Chart(ctxVendor.getContext('2d'), {
-                    type: 'bar',
-                    data: {
-                        labels: {!! json_encode($vendorPerTipe->pluck('tipeGas.nama')) !!},
-                        datasets: [{
-                            label: 'Vendor Aktif',
-                            data: {!! json_encode($vendorPerTipe->pluck('jumlah')) !!},
-                            backgroundColor: '#3498db',
-                            borderColor: '#2980b9',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 1
-                                }
-                            }
-                        },
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Vendor Aktif per Tipe Gas'
-                            }
-                        }
-                    }
-                });
+            // Pengembalian Repeater
+            $('#add-pengembalian').click(function() {
+                const template = `
+            <div class="pengembalian-item border p-3 mb-3 rounded shadow-sm" data-item="${pengembalianIndex}" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="mb-0 text-danger"><i class="mdi mdi-gas-cylinder me-1"></i>Produk #${pengembalianIndex + 1}</h6>
+                    <button type="button" class="btn btn-danger btn-sm remove-pengembalian">
+                        <i class="mdi mdi-delete"></i> Hapus
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label><i class="mdi mdi-gas-cylinder me-1"></i>Produk Gas</label>
+                        <select name="items[${pengembalianIndex}][produk_id]" class="select2 form-control" data-placeholder="Pilih Produk Gas" required>
+                            <option value=""></option>
+                            @foreach ($stokGas as $stok)
+                                <option value="{{ $stok->id }}">{{ $stok->tipeGas->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="mdi mdi-counter me-1"></i>Jumlah</label>
+                        <input type="number" name="items[${pengembalianIndex}][jumlah]" class="form-control" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="mdi mdi-alert-circle me-1"></i>Jumlah Rusak</label>
+                        <input type="number" name="items[${pengembalianIndex}][jumlah_rusak]" class="form-control" value="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label><i class="mdi mdi-alert-circle me-1"></i>Kondisi Rusak</label>
+                    <div class="d-flex">
+                        <div class="custom-control custom-checkbox mr-3">
+                            <input type="checkbox" class="custom-control-input" id="rusak_${pengembalianIndex}" name="items[${pengembalianIndex}][kondisi_rusak]" value="1">
+                            <label class="custom-control-label" for="rusak_${pengembalianIndex}">Ada yang rusak</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                $('#pengembalian-container').append(template);
+                const newItem = $('.pengembalian-item').last();
+                initSelect2(newItem);
+                pengembalianIndex++;
+                updatePengembalianButtons();
+            });
+
+            $(document).on('click', '.remove-pengembalian', function() {
+                if ($('.pengembalian-item').length > 1) {
+                    $(this).closest('.pengembalian-item').remove();
+                    updatePengembalianButtons();
+                }
+            });
+
+            function updatePengembalianButtons() {
+                if ($('.pengembalian-item').length > 1) {
+                    $('.remove-pengembalian').show();
+                } else {
+                    $('.remove-pengembalian').hide();
+                }
             }
 
+            // Pembelian Repeater
+            $('#add-pembelian').click(function() {
+                const template = `
+            <div class="pembelian-item border p-3 mb-3 rounded shadow-sm" data-item="${pembelianIndex}" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef);">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h6 class="mb-0 text-primary"><i class="mdi mdi-numeric-${pembelianIndex + 1}-circle me-1"></i>Produk #${pembelianIndex + 1}</h6>
+                    <button type="button" class="btn btn-danger btn-sm remove-pembelian">
+                        <i class="mdi mdi-delete"></i> Hapus
+                    </button>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label><i class="mdi mdi-gas-cylinder me-1"></i>Produk Gas</label>
+                        <select name="items[${pembelianIndex}][tipe_id]" class="form-control select2-item" data-placeholder="Pilih Produk Gas" required>
+                            <option value="">Pilih Produk Gas</option>
+                            @foreach ($tipeGas as $produk)
+                                <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label><i class="mdi mdi-counter me-1"></i>Jumlah</label>
+                        <input type="number" name="items[${pembelianIndex}][jumlah]" class="form-control" min="1" value="1" required>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label><i class="mdi mdi-currency-usd me-1"></i>Harga Beli Satuan(Rp)</label>
+                        <input type="number" name="items[${pembelianIndex}][harga_beli]" class="form-control" min="0" required>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label><i class="mdi mdi-calendar me-1"></i>Tanggal Masuk</label>
+                        <input type="date" name="items[${pembelianIndex}][tanggal_masuk]" class="form-control" value="{{ date('Y-m-d') }}" required>
+                    </div>
+                </div>
+            </div>
+        `;
+
+                $('#pembelian-container').append(template);
+                const newItem = $('.pembelian-item').last();
+                initSelect2(newItem);
+                pembelianIndex++;
+                updatePembelianButtons();
+            });
+
+            $(document).on('click', '.remove-pembelian', function() {
+                if ($('.pembelian-item').length > 1) {
+                    $(this).closest('.pembelian-item').remove();
+                    updatePembelianButtons();
+                }
+            });
+
+            function updatePembelianButtons() {
+                if ($('.pembelian-item').length > 1) {
+                    $('.remove-pembelian').show();
+                } else {
+                    $('.remove-pembelian').hide();
+                }
+            }
+
+            // Initialize everything
+            initSelect2();
+            updatePenjualanButtons();
+            updatePengembalianButtons();
+            updatePembelianButtons();
+
+            console.log('Dashboard initialized successfully');
+            console.log('Vendors available:', {{ $vendors->count() }});
         });
     </script>
-
-    
-@endsection
+@endpush

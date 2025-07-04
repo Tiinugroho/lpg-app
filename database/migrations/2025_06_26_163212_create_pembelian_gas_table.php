@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('pembelian_gas', function (Blueprint $table) {
             $table->id();
             $table->string('kode_pembelian');
-            $table->foreignId('produk_id')->constrained('stok_gas')->onDelete('cascade');
+            $table->foreignId('tipe_id')->constrained('tipe_gas')->onDelete('cascade');
             $table->foreignId('vendor_id')->constrained('vendor')->onDelete('cascade');
             $table->integer('jumlah');
-            $table->decimal('harga_beli', 12, 2);
+            $table->decimal('harga_beli', 12, 0);
             $table->date('tanggal_masuk');
             $table->string('keterangan')->nullable();
+            $table->timestamps();
         });
     }
 

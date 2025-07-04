@@ -11,11 +11,11 @@ class PembelianGas extends Model
 
     protected $table = 'pembelian_gas';
 
-    protected $fillable = ['kode_pembelian', 'produk_id', 'vendor_id', 'jumlah', 'harga_beli', 'tanggal_masuk', 'keterangan'];
+    protected $fillable = ['kode_pembelian', 'tipe_id', 'vendor_id', 'jumlah', 'harga_beli', 'tanggal_masuk', 'keterangan'];
 
-    public function produk()
+    public function tipeGas()
     {
-        return $this->belongsTo(StokGas::class, 'produk_id');
+        return $this->belongsTo(TipeGas::class,'tipe_id');
     }
 
     public function vendor()
@@ -23,11 +23,8 @@ class PembelianGas extends Model
         return $this->belongsTo(Vendor::class, 'vendor_id');
     }
 
-    protected static function booted()
+    public function stokGas()
     {
-        static::creating(function ($pembelian) {
-            $lastId = static::max('id') + 1;
-            $pembelian->kode_pembelian = 'PB-' . str_pad($lastId, 6, '0', STR_PAD_LEFT);
-        });
+        return $this->belongsTo(StokGas::class);
     }
 }

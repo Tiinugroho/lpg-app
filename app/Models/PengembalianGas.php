@@ -13,16 +13,12 @@ class PengembalianGas extends Model
 
     protected $fillable = ['kode', 'nama_pembeli', 'no_kk', 'no_telp', 'produk_id', 'kondisi_rusak', 'jumlah', 'jumlah_rusak', 'tanggal_pengembalian', 'keterangan'];
 
-    public function stok()
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
+    public function stokGas()
     {
         return $this->belongsTo(StokGas::class, 'produk_id');
-    }
-
-    protected static function booted()
-    {
-        static::creating(function ($pengembalian) {
-            $lastId = static::max('id') + 1;
-            $pengembalian->kode = 'RET-' . str_pad($lastId, 6, '0', STR_PAD_LEFT);
-        });
     }
 }

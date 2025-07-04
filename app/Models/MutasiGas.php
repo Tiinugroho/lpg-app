@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class MutasiGas extends Model
 {
@@ -11,17 +11,66 @@ class MutasiGas extends Model
 
     protected $table = 'mutasi_gas';
 
-    protected $fillable = ['kode', 'produk_id', 'stok_awal', 'stok_masuk', 'stok_keluar', 'stok_akhir', 'total_harga', 'kode_mutasi', 'ket_mutasi', 'tanggal'];
+    protected $fillable = [
+        'kode',
+        'tipe_id',
+        'produk_id',
+        'stok_awal',
+        'stok_masuk',
+        'stok_keluar',
+        'stok_akhir',
+        'total_harga',
+        'kode_mutasi',
+        'ket_mutasi',
+        'tanggal',
+    ];
 
-    public function stok()
+    protected $casts = [
+        'tanggal' => 'date',
+        'total_harga' => 'decimal:0',
+    ];
+
+    public function tipeGas()
+    {
+        return $this->belongsTo(TipeGas::class, 'tipe_id');
+    }
+
+    public function stokGas()
     {
         return $this->belongsTo(StokGas::class, 'produk_id');
     }
-    protected static function booted()
+
+    /**
+     * Get kode mutasi description
+     */
+    public function getKodeMutasiDescriptionAttribute()
     {
-        static::creating(function ($mutasi) {
-            $lastId = static::max('id') + 1;
-            $mutasi->kode = 'MUT-' . str_pad($lastId, 6, '0', STR_PAD_LEFT);
-        });
+        $descriptions = [
+            'M' => 'Masuk',
+            'K' => 'Keluar',
+            'P' => 'Pengembalian',
+            'R' => 'Rusak',
+            'A' => 'Adjustment',
+            'H' => 'Edit Harga'
+        ];
+
+        return $descriptions[$this->kode_mutasi] ?? $this->kode_mutasi;
+    }
+
+    /**
+     * Get kode mutasi badge class
+     */
+    public function getKodeMutasiBadgeClassAttribute()
+    {
+        $classes = [
+            'M' => 'bg-success',
+            'K' => 'bg-danger',
+            'P' => 'bg-info',
+            'R' => 'bg-warning',
+            'A' => 'bg-secondary',
+            'H' => 'bg-primary'
+        ];
+
+        return $classes[$this->kode_mutasi] ?? 'bg-dark';
     }
 }

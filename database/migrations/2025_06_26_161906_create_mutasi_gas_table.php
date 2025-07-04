@@ -13,12 +13,13 @@ return new class extends Migration {
         Schema::create('mutasi_gas', function (Blueprint $table) {
             $table->id();
             $table->string('kode');
-            $table->foreignId('produk_id')->constrained('stok_gas')->onDelete('cascade');
+            $table->foreignId('tipe_id')->nullable()->constrained('tipe_gas')->onDelete('cascade');
+            $table->foreignId('produk_id')->nullable()->constrained('stok_gas')->onDelete('cascade');
             $table->integer('stok_awal');
             $table->integer('stok_masuk')->default(0);
             $table->integer('stok_keluar')->default(0);
             $table->integer('stok_akhir');
-            $table->decimal('total_harga',2,0);
+            $table->decimal('total_harga', 12, 0);
             $table->string('kode_mutasi'); // K, M, P
             $table->string('ket_mutasi'); // Keluar, Masuk, Pengembalian
             $table->date('tanggal');

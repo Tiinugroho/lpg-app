@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Vendor extends Model
 {
@@ -18,15 +18,20 @@ class Vendor extends Model
         'telepon',
         'email',
         'kontak_person',
-        'status_aktif',
+        'status_aktif'
     ];
 
-    // Event auto generate kode_vendor saat create
-    protected static function booted()
+    protected $casts = [
+        'status_aktif' => 'boolean'
+    ];
+
+    public function stokGas()
     {
-        static::creating(function ($vendor) {
-            $lastId = static::max('id') + 1;
-            $vendor->kode_vendor = 'VND-' . str_pad($lastId, 5, '0', STR_PAD_LEFT);
-        });
+        return $this->hasMany(StokGas::class);
+    }
+
+    public function pembelianGas()
+    {
+        return $this->hasMany(PembelianGas::class);
     }
 }
