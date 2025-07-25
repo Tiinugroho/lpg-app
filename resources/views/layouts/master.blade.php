@@ -21,19 +21,6 @@
     <link href="{{ asset('adm/dist/css/style.min.css') }}" rel="stylesheet">
 
     <style>
-        /* .avatar-circle {
-            width: 40px;
-            height: 40px;
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 14px;
-        } */
-
         /* Custom Repeater Styles */
         .item-row {
             border: 1px solid #e9ecef !important;
@@ -41,71 +28,84 @@
             background-color: #f8f9fa;
             transition: all 0.3s ease;
         }
-
+        
         .item-row:hover {
             border-color: #007bff !important;
             box-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
         }
-
+        
         .remove-item {
             transition: all 0.2s ease;
         }
-
+        
         .remove-item:hover {
             transform: scale(1.05);
         }
-
+        
         #add-item {
             transition: all 0.2s ease;
         }
-
+        
         #add-item:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
         }
-
+        
         #item-counter {
             font-size: 0.875rem;
             padding: 0.375rem 0.75rem;
         }
-
-        /* ✅ FIXED: Gradient backgrounds */
+        
+        /* Gradient backgrounds */
         .bg-gradient-success {
             background: linear-gradient(135deg, #28a745, #20c997) !important;
         }
-
+        
         .bg-gradient-info {
             background: linear-gradient(135deg, #17a2b8, #138496) !important;
         }
-
+        
         .bg-gradient-danger {
             background: linear-gradient(135deg, #dc3545, #c82333) !important;
         }
-
+        
         .bg-gradient-dark {
             background: linear-gradient(135deg, #343a40, #23272b) !important;
         }
-
+        
         .bg-gradient-warning {
             background: linear-gradient(135deg, #ffc107, #e0a800) !important;
         }
-
+        
         .bg-gradient-secondary {
             background: linear-gradient(135deg, #6c757d, #545b62) !important;
         }
-
-        /* ✅ FIXED: Card hover effects */
+        
+        /* Card hover effects */
         .card {
             transition: all 0.3s ease;
         }
-
+        
         .card:hover {
-            /* transform: translateY(-2px); */
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
         }
-
         
+        /* Debug styles for user info */
+        .debug-user-info {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            z-index: 9999;
+            display: none;
+        }
     </style>
+    
+    @stack('styles')
 </head>
 
 <body>

@@ -2,14 +2,13 @@
     <div class="scroll-sidebar">
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
-
                 <li class="sidebar-item">
                     <a class="sidebar-link waves-effect waves-dark {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">
                         <i class="mdi mdi-view-dashboard"></i>
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-
+                
                 @if(in_array(Auth::user()->role, ['super-admin', 'owner', 'kasir']))
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark {{ Request::is('transaksi/*') ? 'active' : '' }}" href="javascript:void(0)">
@@ -38,7 +37,7 @@
                     </ul>
                 </li>
                 @endif
-
+                
                 @if(in_array(Auth::user()->role, ['super-admin', 'owner']))
                 <li class="sidebar-item">
                     <a href="{{ url('/stok') }}" class="sidebar-link waves-effect waves-dark {{ Request::is('stok*') ? 'active' : '' }}">
@@ -46,14 +45,12 @@
                         <span class="hide-menu">Stok Gas</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
                     <a href="{{ url('/mutasi') }}" class="sidebar-link waves-effect waves-dark {{ Request::is('mutasi*') ? 'active' : '' }}">
                         <i class="mdi mdi-transfer"></i>
                         <span class="hide-menu">Mutasi Stok</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark {{ Request::is('master-data/*') ? 'active' : '' }}" href="javascript:void(0)">
                         <i class="mdi mdi-database"></i>
@@ -68,14 +65,36 @@
                         </li>
                     </ul>
                 </li>
-
+                
+                <!-- Laporan Menu dengan Submenu -->
                 <li class="sidebar-item">
-                    <a href="{{ url('/laporan') }}" class="sidebar-link waves-effect waves-dark {{ Request::is('laporan*') ? 'active' : '' }}">
+                    <a class="sidebar-link has-arrow waves-effect waves-dark {{ Request::is('laporan*') ? 'active' : '' }}" href="javascript:void(0)">
                         <i class="mdi mdi-file-document-box"></i>
                         <span class="hide-menu">Laporan</span>
                     </a>
+                    <ul aria-expanded="false" class="collapse first-level {{ Request::is('laporan*') ? 'in' : '' }}">
+                        
+                        <li class="sidebar-item">
+                            <a href="{{ route('laporan.harian') }}" class="sidebar-link {{ Request::is('laporan/harian*') ? 'active' : '' }}">
+                                <i class="mdi mdi-calendar"></i>
+                                <span class="hide-menu"> Laporan Harian </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('laporan.mingguan') }}" class="sidebar-link {{ Request::is('laporan/mingguan*') ? 'active' : '' }}">
+                                <i class="mdi mdi-calendar"></i>
+                                <span class="hide-menu"> Laporan Mingguan </span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('laporan.bulanan') }}" class="sidebar-link {{ Request::is('laporan/bulanan*') ? 'active' : '' }}">
+                                <i class="mdi mdi-calendar"></i>
+                                <span class="hide-menu"> Laporan Bulanan </span>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
-
+                
                 <li class="sidebar-item">
                     <a class="sidebar-link has-arrow waves-effect waves-dark {{ Request::is('manajemen-user/*') ? 'active' : '' }}" href="javascript:void(0)">
                         <i class="mdi mdi-account-multiple"></i>
@@ -97,7 +116,6 @@
                     </ul>
                 </li>
                 @endif
-
             </ul>
         </nav>
     </div>

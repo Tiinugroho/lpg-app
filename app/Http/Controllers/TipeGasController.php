@@ -4,62 +4,113 @@ namespace App\Http\Controllers;
 
 use App\Models\TipeGas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TipeGasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $tipeGas = TipeGas::orderBy('created_at', 'desc')->get();
+        return view('tipe-gas.index', compact('tipeGas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('tipe-gas.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required|string|max:255|unique:tipe_gas,nama',
+        ], [
+            'nama.required' => 'Nama tipe gas wajib diisi',
+            'nama.unique' => 'Nama tipe gas sudah ada',
+            'nama.max' => 'Nama tipe gas maksimal 255 karakter'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            TipeGas::create([
+                'nama' => $request->nama
+            ]);
+
+            return redirect()->route('tipe-gas.index')
+                ->with('success', 'Tipe gas berhasil ditambahkan');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Gagal menambahkan tipe gas: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TipeGas $tipeGas)
+    public function show($id)
     {
-        //
+        $tipeGas = TipeGas::findOrFail($id);
+        return view('tipe-gas.show', compact('tipeGas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TipeGas $tipeGas)
+    public function edit($id)
     {
-        //
+        $tipeGas = TipeGas::findOrFail($id);
+        return view('tipe-gas.edit', compact('tipeGas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TipeGas $tipeGas)
+    public function update(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'required|exists:tipe_gas,id',
+            'nama' => 'required|string|max:255|unique:tipe_gas,nama,' . $request->id,
+        ], [
+            'nama.required' => 'Nama tipe gas wajib diisi',
+            'nama.unique' => 'Nama tipe gas sudah ada',
+            'nama.max' => 'Nama tipe gas maksimal 255 karakter'
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        try {
+            $tipeGas = TipeGas::findOrFail($request->id);
+            $tipeGas->update([
+                'nama' => $request->nama
+            ]);
+
+            return redirect()->route('tipe-gas.index')
+                ->with('success', 'Tipe gas berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Gagal memperbarui tipe gas: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TipeGas $tipeGas)
+    public function destroy($id)
     {
-        //
+        try {
+            $tipeGas = TipeGas::findOrFail($id);
+            
+            // Check if tipe gas is being used
+            if ($tipeGas->stokGas()->count() > 0) {
+                return redirect()->route('tipe-gas.index')
+                    ->with('error', 'Tipe gas tidak dapat dihapus karena masih digunakan dalam stok');
+            }
+
+            $tipeGas->delete();
+
+            return redirect()->route('tipe-gas.index')
+                ->with('success', 'Tipe gas berhasil dihapus');
+        } catch (\Exception $e) {
+            return redirect()->route('tipe-gas.index')
+                ->with('error', 'Gagal menghapus tipe gas: ' . $e->getMessage());
+        }
     }
 }
