@@ -37,6 +37,11 @@
                                 <td><strong>Nama Tipe Gas</strong></td>
                                 <td>: {{ $tipeGas->nama }}</td>
                             </tr>
+                            {{-- TAMBAHKAN BARIS INI --}}
+                            <tr>
+                                <td><strong>Harga Jual Standar</strong></td>
+                                <td>: <strong>Rp {{ number_format($tipeGas->harga_jual, 0, ',', '.') }}</strong></td>
+                            </tr>
                             <tr>
                                 <td><strong>Tanggal Dibuat</strong></td>
                                 <td>: {{ $tipeGas->created_at->format('d F Y H:i:s') }}</td>

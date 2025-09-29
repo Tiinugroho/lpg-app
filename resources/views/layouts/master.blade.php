@@ -199,7 +199,7 @@
         <script>
             Swal.fire({
                 icon: 'success',
-                title: 'Selamat Datang!',
+                title: 'Berhasil!',
                 text: @json(session('success') . ' ' . Auth::user()->nama_lengkap),
                 timer: 2500,
                 showConfirmButton: false

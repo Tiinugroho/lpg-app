@@ -11,5 +11,10 @@ class TipeGas extends Model
 
     protected $table = 'tipe_gas';
 
-    protected $fillable = ['nama'];
+    protected $fillable = ['nama','harga_jual'];
+
+    public function stokGas()
+    {
+        return $this->hasMany(StokGas::class, 'tipe_gas_id');
+    }
 }

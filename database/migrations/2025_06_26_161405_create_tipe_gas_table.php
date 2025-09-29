@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('tipe_gas', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
+            $table->decimal('harga_jual', 12, 2)->default(0);
             $table->timestamps();
         });
     }

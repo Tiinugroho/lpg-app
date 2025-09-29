@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('mutasi_gas', function (Blueprint $table) {
             $table->id();
-            $table->string('kode');
+            // $table->string('kode');
             $table->foreignId('tipe_id')->nullable()->constrained('tipe_gas')->onDelete('cascade');
             $table->foreignId('produk_id')->nullable()->constrained('stok_gas')->onDelete('cascade');
             $table->integer('stok_awal');

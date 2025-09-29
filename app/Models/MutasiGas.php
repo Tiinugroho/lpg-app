@@ -12,7 +12,7 @@ class MutasiGas extends Model
     protected $table = 'mutasi_gas';
 
     protected $fillable = [
-        'kode',
+        // 'kode',
         'tipe_id',
         'produk_id',
         'stok_awal',
